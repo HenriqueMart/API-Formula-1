@@ -1,4 +1,4 @@
-package com.ifba.api_formula_1.demo;
+package com.ifba.api.formula1;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
