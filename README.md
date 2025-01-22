@@ -18,7 +18,7 @@ Qualquer pessoa pode utilizar a API. Caso deseje distribuir ou divulgar, é impo
 
 ### 4. Contribuindo
 
-Se você deseja contribuir para o desenvolvimento do script, sinta-se à vontade para enviar pull requests ou fornecer feedback. O projeto está sempre aberto a melhorias e novas ideias, e é uma ótima oportunidade para aprendizado e colaboração!
+Se você deseja contribuir para o desenvolvimento dessa API, sinta-se à vontade para enviar pull requests ou fornecer feedback. O projeto está sempre aberto a melhorias e novas ideias, e é uma ótima oportunidade para aprendizado e colaboração!
 
 ### 5. Licença
 
