@@ -1,14 +1,12 @@
-package com.ifba.api.formula1.usuario.mapper;
+package com.ifba.api.formula1.insfraestruture.mapper;
 
-import com.ifba.api.formula1.usuario.dto.UsuarioGetResponseDto;
-import com.ifba.api.formula1.usuario.entity.Usuario;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.config.Configuration;
 import org.modelmapper.convention.MatchingStrategies;
-import org.modelmapper.spi.MatchingStrategy;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class ObjectMapperUtil {
@@ -17,15 +15,20 @@ public class ObjectMapperUtil {
 
     static {
         MODEL_MAPPER = new ModelMapper();
+        MODEL_MAPPER.getConfiguration()
+                .setAmbiguityIgnored(true)
+                .setMatchingStrategy(MatchingStrategies.STRICT)
+                .setFieldMatchingEnabled(true)
+                .setFieldAccessLevel(Configuration.AccessLevel.PRIVATE);
     }
 
-    public <Input, Output> Output map(final Input object, final Class<Output> clazz) {
-
-        MODEL_MAPPER.getConfiguration().setAmbiguityIgnored(true).setMatchingStrategy(MatchingStrategies.STRICT).setFieldMatchingEnabled(true).setFieldAccessLevel(Configuration.AccessLevel.PRIVATE);
-
-        Output c = MODEL_MAPPER.map(object, clazz);
-
-        return c;
+    public static <D, T> D map(final T source, final Class<D> destinationType) {
+        return MODEL_MAPPER.map(source, destinationType);
     }
 
+    public static <D, T> List<D> mapList(final List<T> sourceList, final Class<D> destinationType) {
+        return sourceList.stream()
+                .map(entity -> MODEL_MAPPER.map(entity, destinationType))
+                .collect(Collectors.toList());
+    }
 }
