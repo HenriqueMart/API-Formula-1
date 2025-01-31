@@ -1,5 +1,6 @@
 package com.ifba.api.formula1.usuario.service;
 
+import com.ifba.api.formula1.insfraestruture.exception.BusinessException;
 import com.ifba.api.formula1.usuario.entity.Usuario;
 import com.ifba.api.formula1.usuario.model.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +42,7 @@ public class UsuarioService implements UsuarioIService{
 
     public Usuario update(Long id, Usuario usuario) {
 
-        Usuario usuarioSalvo = usuarioRepository.findById(id).orElse(null);
+        Usuario usuarioSalvo = usuarioRepository.findById(id).orElseThrow(() -> new BusinessException("Recurso não encontrado"));
         return usuarioRepository.save(usuarioSalvo);
     }
 
