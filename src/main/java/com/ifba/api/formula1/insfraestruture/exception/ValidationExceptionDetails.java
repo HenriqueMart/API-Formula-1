@@ -1,21 +1,18 @@
 package br.com.ifba.infrastructure.exception;
 
-import lombok.Getter;
-
 import java.time.LocalDateTime;
 
-@Getter
 public class ValidationExceptionDetails {
 
-    private LocalDateTime timestamp;
-    private int status;
-    private String title;
-    private String details;
-    private String developerMessage;
-    private String fields;
-    private String fieldsMessage;
+    private LocalDateTime timestamp; // Data e hora em que o erro ocorreu
+    private int status;              // Código de status HTTP (ex: 400, 404, 500)
+    private String title;            // Título do erro (ex: "Erro de Validação")
+    private String details;          // Detalhes gerais sobre o erro
+    private String developerMessage; // Mensagem técnica para desenvolvedores
+    private String fields;           // Campos com erro
+    private String fieldsMessage;    // Mensagens de erro associadas aos campos
 
-    // Construtor privado, necessário
+    // Construtor privado para forçar o uso do Builder
     private ValidationExceptionDetails(Builder builder) {
         this.timestamp = builder.timestamp;
         this.status = builder.status;
@@ -26,7 +23,36 @@ public class ValidationExceptionDetails {
         this.fieldsMessage = builder.fieldsMessage;
     }
 
-    // Padrão builder
+    // Métodos getters (obrigatórios para acessar os atributos)
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public String getDeveloperMessage() {
+        return developerMessage;
+    }
+
+    public String getFields() {
+        return fields;
+    }
+
+    public String getFieldsMessage() {
+        return fieldsMessage;
+    }
+
+    // Classe Builder interna
     public static class Builder {
         private LocalDateTime timestamp;
         private int status;
@@ -36,6 +62,7 @@ public class ValidationExceptionDetails {
         private String fields;
         private String fieldsMessage;
 
+        // Métodos para definir os valores dos atributos
         public Builder timestamp(LocalDateTime timestamp) {
             this.timestamp = timestamp;
             return this;
@@ -71,12 +98,13 @@ public class ValidationExceptionDetails {
             return this;
         }
 
+        // Método para construir a instância de ValidationExceptionDetails
         public ValidationExceptionDetails build() {
             return new ValidationExceptionDetails(this);
         }
     }
 
-    // Inicialização
+    // Método estático para iniciar o Builder
     public static Builder builder() {
         return new Builder();
     }
