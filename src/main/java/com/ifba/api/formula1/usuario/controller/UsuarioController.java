@@ -6,6 +6,7 @@ import com.ifba.api.formula1.usuario.entity.Usuario;
 import com.ifba.api.formula1.insfraestruture.mapper.ObjectMapperUtil;
 import com.ifba.api.formula1.usuario.service.UsuarioIService;
 import com.ifba.api.formula1.usuario.service.UsuarioService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,7 +33,7 @@ public class UsuarioController {
 
     }
     @PostMapping(path = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> save(@RequestBody UsuarioPostRequestDto usuarioPostRequestDto){
+    public ResponseEntity<?> save(@RequestBody @Valid UsuarioPostRequestDto usuarioPostRequestDto){
         System.out.println("Dados recebidos: " + usuarioPostRequestDto);
 
 
@@ -44,7 +45,7 @@ public class UsuarioController {
     }
 
     @PutMapping(path = "/update/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public  ResponseEntity<Void> update(@PathVariable("id") Long id, @RequestBody Usuario usuario){
+    public  ResponseEntity<Void> update(@PathVariable("id") Long id, @RequestBody @Valid Usuario usuario){
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
     }
