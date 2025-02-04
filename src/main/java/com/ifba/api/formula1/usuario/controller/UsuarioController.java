@@ -8,6 +8,8 @@ import com.ifba.api.formula1.usuario.service.UsuarioIService;
 import com.ifba.api.formula1.usuario.service.UsuarioService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,9 +29,8 @@ public class UsuarioController {
 
 
     @GetMapping(path = "/findall", produces = MediaType.APPLICATION_JSON_VALUE)
-    public  ResponseEntity<?> findByAll(){
-
-        return ResponseEntity.status(HttpStatus.OK).body(objectMapperUtil.mapList(this.usuarioService.findAll(), UsuarioGetResponseDto.class));
+    public  ResponseEntity<Page<UsuarioGetResponseDto>> findByAll(Pageable pageable){
+            return ResponseEntity.status(HttpStatus.OK).body(this.usuarioService.findAll(pageable).map(c -> ObjectMapperUtil.map(c, UsuarioGetResponseDto.class)));
 
     }
     @PostMapping(path = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

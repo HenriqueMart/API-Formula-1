@@ -3,15 +3,13 @@ package com.ifba.api.formula1.usuario.service;
 import com.ifba.api.formula1.insfraestruture.exception.BusinessException;
 import com.ifba.api.formula1.usuario.entity.Usuario;
 import com.ifba.api.formula1.usuario.model.UsuarioRepository;
-import lombok.RequiredArgsConstructor;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable; // Importação correta
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.logging.Logger;
 
 @Service
 public class UsuarioService implements UsuarioIService{
@@ -28,8 +26,9 @@ public class UsuarioService implements UsuarioIService{
     }
 
 
-    public List<Usuario> findAll() {
-        return usuarioRepository.findAll();
+    @Override
+    public Page<Usuario> findAll(Pageable pageable) {
+        return usuarioRepository.findAll(pageable);
     }
 
 
