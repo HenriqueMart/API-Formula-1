@@ -6,8 +6,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.springframework.boot.context.properties.bind.Name;
 
+
+/*Modelo de Envio json das requisições do Post*/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

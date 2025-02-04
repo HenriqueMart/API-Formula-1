@@ -4,15 +4,16 @@ import java.time.LocalDateTime;
 
 public class ValidationExceptionDetails {
 
-    private LocalDateTime timestamp; // Data e hora em que o erro ocorreu
-    private int status;              // Código de status HTTP (ex: 400, 404, 500)
-    private String title;            // Título do erro (ex: "Erro de Validação")
-    private String details;          // Detalhes gerais sobre o erro
+    // Atributos para armazenar informações sobre a exceção
+    private LocalDateTime timestamp; // Data e hora do erro
+    private int status;              // Código de status HTTP (ex: 400 - Bad Request)
+    private String title;            // Título do erro
+    private String details;          // Mensagem detalhada do erro
     private String developerMessage; // Mensagem técnica para desenvolvedores
-    private String fields;           // Campos com erro
+    private String fields;           // Campos que causaram o erro
     private String fieldsMessage;    // Mensagens de erro associadas aos campos
 
-    // Construtor privado para forçar o uso do Builder
+    // Construtor privado para garantir o uso do Builder
     private ValidationExceptionDetails(Builder builder) {
         this.timestamp = builder.timestamp;
         this.status = builder.status;
@@ -23,7 +24,7 @@ public class ValidationExceptionDetails {
         this.fieldsMessage = builder.fieldsMessage;
     }
 
-    // Métodos getters (obrigatórios para acessar os atributos)
+    // Métodos getters para acessar os atributos
     public LocalDateTime getTimestamp() {
         return timestamp;
     }
@@ -52,7 +53,7 @@ public class ValidationExceptionDetails {
         return fieldsMessage;
     }
 
-    // Classe Builder interna
+    // Classe interna Builder para facilitar a criação de objetos
     public static class Builder {
         private LocalDateTime timestamp;
         private int status;
@@ -62,7 +63,7 @@ public class ValidationExceptionDetails {
         private String fields;
         private String fieldsMessage;
 
-        // Métodos para definir os valores dos atributos
+        // Métodos para definir valores dos atributos e retornar o Builder atualizado
         public Builder timestamp(LocalDateTime timestamp) {
             this.timestamp = timestamp;
             return this;
@@ -98,7 +99,7 @@ public class ValidationExceptionDetails {
             return this;
         }
 
-        // Método para construir a instância de ValidationExceptionDetails
+        // Método para construir e retornar uma instância de ValidationExceptionDetails
         public ValidationExceptionDetails build() {
             return new ValidationExceptionDetails(this);
         }

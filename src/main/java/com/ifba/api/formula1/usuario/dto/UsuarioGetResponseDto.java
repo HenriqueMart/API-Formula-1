@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/*Resposta das requisições do Get*/
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

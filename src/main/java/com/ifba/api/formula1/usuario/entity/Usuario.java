@@ -7,15 +7,12 @@ import lombok.*;
 
 import java.io.Serializable;
 
-// Anotação para indicar que esta classe é uma entidade JPA
+/*Criação das entidades para a tabela do banco de dados*/
+
 @Entity
-// Gera automaticamente os métodos getters, setters, equals, hashCode e toString
 @Data
-// Gera um construtor sem argumentos
 @NoArgsConstructor
-// Gera um construtor com todos os argumentos
 @AllArgsConstructor
-// Define o nome da tabela no banco de dados como "users"
 @Table(name = "usuarios")
 @EqualsAndHashCode(callSuper = false)
 

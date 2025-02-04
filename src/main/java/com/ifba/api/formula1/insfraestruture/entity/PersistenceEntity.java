@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
 
+/*Classe que gerará os ID*/
 @MappedSuperclass
 @Data
 public class PersistenceEntity {

@@ -12,39 +12,40 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestControllerAdvice
+@RestControllerAdvice // Indica que esta classe trata exceções globalmente para os controllers
 public class ApiExceptionHandler {
 
-    @Value(value = "${server.error.include-exception}")
+    @Value(value = "${server.error.include-exception}") // Obtém configuração para exibir stack trace
     private boolean printStackTrace;
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler(MethodArgumentNotValidException.class) // Captura exceções de validação de argumentos
     protected ResponseEntity<br.com.ifba.infrastructure.exception.ValidationExceptionDetails> handleMethodArgumentNotValid(
             MethodArgumentNotValidException methodArgumentNotValidException) {
 
         List<FieldError> fieldErrors = methodArgumentNotValidException.getBindingResult().getFieldErrors();
 
-        // Coletando os campos e as mensagens de erro
+        // Coletando os nomes dos campos com erro
         String fields = fieldErrors.stream()
                 .map(FieldError::getField)
                 .collect(Collectors.joining(", "));
 
+        // Coletando as mensagens de erro correspondentes
         String fieldMessages = fieldErrors.stream()
                 .map(FieldError::getDefaultMessage)
                 .collect(Collectors.joining(", "));
 
-        // Construindo o objeto de resposta
+        // Criando objeto de resposta para os erros de validação
         br.com.ifba.infrastructure.exception.ValidationExceptionDetails errorDetails = br.com.ifba.infrastructure.exception.ValidationExceptionDetails.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.BAD_REQUEST.value()) // Usando HttpStatus.BAD_REQUEST.value() para o status 400
-                .title("Erro de Validação")
-                .details("Por favor, verifique os campos com erros.")
-                .developerMessage(methodArgumentNotValidException.getClass().getName()) // Mensagem técnica
-                .fields(fields) // Campos com erro
-                .fieldsMessage(fieldMessages) // Mensagens de erro associadas aos campos
+                .timestamp(LocalDateTime.now()) // Registra o momento do erro
+                .status(HttpStatus.BAD_REQUEST.value()) // Código HTTP 400 (Bad Request)
+                .title("Erro de Validação") // Título da resposta de erro
+                .details("Por favor, verifique os campos com erros.") // Mensagem geral
+                .developerMessage(methodArgumentNotValidException.getClass().getName()) // Nome da exceção técnica
+                .fields(fields) // Lista dos campos inválidos
+                .fieldsMessage(fieldMessages) // Mensagens de erro específicas dos campos
                 .build();
 
-        // Retornando a resposta com status 400 (Bad Request)
+        // Retorna resposta HTTP 400 com detalhes do erro
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 }

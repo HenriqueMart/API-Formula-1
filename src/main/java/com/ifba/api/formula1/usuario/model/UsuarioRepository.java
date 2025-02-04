@@ -8,6 +8,7 @@ import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
+/*Repositório Para comunicação do banco de dados*/
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     @Query("select u from Usuario u where u.login = ?1")
     Optional<Usuario> findByLogin(String login);
