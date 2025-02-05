@@ -9,12 +9,15 @@ import java.io.Serializable;
 
 /*Criação das entidades para a tabela do banco de dados*/
 
-@Entity
-@Data
+
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Data
 @Table(name = "usuarios")
 @EqualsAndHashCode(callSuper = false)
+@Builder
+//Entidade de usuario com seus atributos
 
 public class Usuario extends PersistenceEntity implements Serializable {
 
@@ -30,8 +33,6 @@ public class Usuario extends PersistenceEntity implements Serializable {
 
     @Column(name = "senha", nullable = false)
     private String senha;
-
-
 
 
 }
