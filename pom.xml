@@ -108,12 +108,15 @@
 	<build>
 		<plugins>
 			<plugin>
+				<!--Configuração do Mavem e do Lambok para ser instanciado nas anotações das classes corretamente-->
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.11.0</version>
 				<configuration>
+					<!--Pegando a Variável do Movem da versão do Java-->
 					<source>${java.version}</source>
 					<target>${java.version}</target>
+					<!--Garantido que foi compilado com a versão do java informada-->
 					<annotationProcessorPaths>
 						<path>
 							<groupId>org.projectlombok</groupId>

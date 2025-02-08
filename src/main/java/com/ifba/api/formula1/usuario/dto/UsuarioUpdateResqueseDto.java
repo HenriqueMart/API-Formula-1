@@ -6,24 +6,23 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/*Resposta das requisições do Get*/
 
+/*Requisição de update*/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UsuarioGetResponseDto {
+public class UsuarioUpdateResqueseDto {
 
-    @JsonProperty(value = "id")
-    private Long id;
-
-    @JsonProperty(value = "nome")
+    @JsonProperty("nome")
     private String nome;
 
-    @JsonProperty(value = "email")
+    @JsonProperty("email")
     private String email;
 
-    @JsonProperty(value = "login")
+    @JsonProperty("login")
     private String login;
 
+    @JsonProperty("senha")
+    private String senha;
 
 }
